@@ -9,7 +9,8 @@ Welcome to my personal portfolio website! This project showcases my journey as a
 
 It is built as a fully responsive, single-page application using vanilla web technologies, featuring interactive elements like dark mode, project filtering, and auto-scrolling components.
 
-## 🚀 Live Demo
+## 🚀 Live Demo 
+https://hiteashgupta1.github.io/My-Portfolio/
 ## ✨ Features
 * **🎨 Modern UI/UX:** Clean, professional design with a "Glassmorphism" navigation bar and smooth scrolling.
 * **🌓 Dark/Light Mode:** Integrated theme toggle with local storage persistence to save user preference.
@@ -21,11 +22,3 @@ It is built as a fully responsive, single-page application using vanilla web tec
 * **Frontend:** HTML5, CSS3 (Custom Variables, Flexbox, Grid), JavaScript (ES6+).
 * **Icons:** FontAwesome.
 * **Fonts:** Google Fonts (Poppins).
-
-## 📂 Project Structure
-```text
-/
-├── index.html      # Main HTML structure
-├── style.css       # Global styles, variables, and responsive design
-├── script.js       # Logic for dark mode, typing effect, and carousel
-└── README.md       # Project documentation
