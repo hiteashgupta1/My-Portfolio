@@ -95,16 +95,57 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 5. Carousel Scroll
-    const scrollLeft = document.getElementById('scrollLeft');
-    const scrollRight = document.getElementById('scrollRight');
+    // 5. Auto-Rotating Carousel
     const carousel = document.getElementById('certCarousel');
+    const scrollLeftBtn = document.getElementById('scrollLeft');
+    const scrollRightBtn = document.getElementById('scrollRight');
+    const carouselWrapper = document.querySelector('.cert-carousel-wrapper');
 
-    scrollLeft.addEventListener('click', () => {
-        carousel.scrollBy({ left: -300, behavior: 'smooth' });
+    // Scroll settings
+    const scrollAmount = 320; // Width of card + gap
+    const autoScrollDelay = 3000; // 3 seconds
+    let autoScrollTimer;
+
+    // Function to scroll right automatically
+    const autoScroll = () => {
+        // Check if we are near the end
+        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+        
+        // If we are at the end, scroll back to start
+        if (carousel.scrollLeft >= maxScroll - 10) {
+            carousel.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+            // Otherwise, scroll right
+            carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        }
+    };
+
+    // Start the timer
+    autoScrollTimer = setInterval(autoScroll, autoScrollDelay);
+
+    // PAUSE on hover (so users can read)
+    carouselWrapper.addEventListener('mouseenter', () => {
+        clearInterval(autoScrollTimer);
     });
 
-    scrollRight.addEventListener('click', () => {
-        carousel.scrollBy({ left: 300, behavior: 'smooth' });
+    // RESUME on mouse leave
+    carouselWrapper.addEventListener('mouseleave', () => {
+        autoScrollTimer = setInterval(autoScroll, autoScrollDelay);
     });
+
+    // Manual Buttons (keep these working)
+    scrollLeftBtn.addEventListener('click', () => {
+        carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        // Reset timer to avoid immediate auto-scroll after click
+        clearInterval(autoScrollTimer);
+        autoScrollTimer = setInterval(autoScroll, autoScrollDelay);
+    });
+
+    scrollRightBtn.addEventListener('click', () => {
+        carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        // Reset timer
+        clearInterval(autoScrollTimer);
+        autoScrollTimer = setInterval(autoScroll, autoScrollDelay);
+    });
+
 });
